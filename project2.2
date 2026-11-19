@@ -1,0 +1,61 @@
+figure;
+hold on;
+%sqaure and circle thingy
+% Square
+
+xsq = [80, 80, 92, 92, 80];
+ysq = [0, 12, 12, 0, 0];
+plot(xsq, ysq);
+
+% Circle
+T = linspace(0, 2*pi, 100);
+xcir = 4*cos(T) + 96;
+ycir = 4*sin(T) + 4;
+
+plot(xcir, ycir);
+
+% Projectile motion no bounce attaounce
+g = 9.8;
+v = randi([20, 40]);
+theta = 30;
+t = linspace(0, 6, 200);
+
+
+x = v * cosd(theta) .* t;
+y = 12 + v * sind(theta) .* t - 0.5 * g * t.^2;
+
+
+t = 0
+bounce_t = 1;
+Bounce_count = 0;
+
+i = 1;
+while bounce_t == 1 && i <= numel(t)
+    xNow = x(i);
+    yNow = y(i);
+
+    if xNow >= 80 && xNow <= 92 && yNow >= 0 && yNow <= 12
+        Bounce_count = Bounce_count + 1;
+    elseif (xNow - 96)^2 + (yNow - 4)^2 <= 4^2
+        Bounce_count = Bounce_count + 1;
+    elseif yNow <= 0
+        bounce_t = 0;
+    end
+
+    if Bounce_count >= 3
+        bounce_t = 0;
+    end
+
+    i = i + 1;
+end
+    
+
+
+
+
+    xlabel('X Position');
+    ylabel('Y Position');
+    title('Project 2');
+    axis equal;
+    grid on;
+    hold off;

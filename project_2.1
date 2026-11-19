@@ -1,0 +1,33 @@
+% Conner Everett Project 2 
+
+% Box and stuff
+% Square 
+xsq = [80, 80, 92, 92, 80];
+ysq = [0, 12, 12, 0, 0];
+
+figure;
+plot(xsq, ysq, 'LineWidth', 2);
+hold on;
+
+% Circle
+T = linspace(0, 2*pi, 100);
+xcir = 4*cos(T) + 85;
+ycir = 4*sin(T);
+
+plot(xcir, ycir, 'LineWidth', 2);
+axis equal;
+
+% Projectile motion
+g = 9.8;
+v = randi([20, 40]);
+t = linspace(0, 5, 100); % Time vector for smooth trajectory
+
+% Projectile equations
+x = v * cos(deg2rad(30)) .* t; 
+y = 12 + v * sin(deg2rad(30)) .* t - 0.5 * g * (t.^2);
+
+plot(x, y, 'LineWidth', 2);
+xlabel('X Position');
+ylabel('Y Position');
+title('Project 2 - Projectile & Target');
+hold off;

@@ -1,0 +1,47 @@
+Main fixes:
+
+ 
+
+while y > 0 && bounce_c <= 3
+    tNow = tNow + dt;
+    x = x0 + v * cosd(theta) * tNow;
+    y = y0 + v * sind(theta) * tNow - 0.5 * g * tNow^2;
+
+    % keep der loctaion for nex index
+    xVals(end + 1) = x;
+    yVals(end + 1) = y;
+
+    if x >= 80 && x <= 92 && y >= 0 && y <= 12
+        if y > 11.99
+            %decrease stepsize this is kinda of for testing
+            bounce_c = bounce_c + 1;
+            x0 = x;
+            y0 = 12;
+
+            theta = rand() * 180;
+            tNow = 0;
+            v = v * (rand * (1/3 - 1/5) + 1/5);
+
+        elseif x > 79.99
+            bounce_c = bounce_c + 1;
+            x0 = 80;
+            y0 = 80;
+
+            theta = rand() * (270 - 90) + 90;
+            tNow = 0;
+            v = v * (rand * (1/3 - 1/5) + 1/5);
+        end
+    end
+
+    if x >= 92 && x <= 100 && y >= 0 && y <= 8
+        if (x - 96)^2 + (y - 4)^2 <= 4^2
+            bounce_c = bounce_c + 1;
+            x0 = x;
+            y0 = y + 0.5;
+
+            theta = randi([0, 180]);
+            tNow = 0;
+            v = v * (rand * (1/3 - 1/5) + 1/5);
+        end
+    end
+end
